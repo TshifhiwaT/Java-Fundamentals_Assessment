@@ -113,7 +113,7 @@ public class SalesManager {
             System.out.println("7 - Total Salary Expenditure");
             System.out.print("Your Option: ");
 
-            while(!input.hasNextInt()){
+             while (!input.hasNextInt()) {
                 System.out.print("Enter a valid number: ");
                 input.nextLine();
             }
@@ -121,37 +121,77 @@ public class SalesManager {
             choice = input.nextInt();
             input.nextLine();
 
-            switch(choice){
+            switch (choice) {
                 case 1:
                     display();
                     break;
 
-                case 2:
-                    System.out.println("Search for Salesperson: ");
-                    String name = input.nextLine();
+                case 2: {
+                    System.out.print("Search for salesperson: ");
+                    String name = getInput();
                     int position = findSalesPerson(name);
 
-                    if(position == -1){
-                        System.out.println("Salesperson not found");
-                    }else{
-                        System.out.println(name + " is found at " + position);
+                    if (position == -1) {
+                        System.out.println("Salesperson not found.");
+                    } else {
+                        System.out.println("Salesperson: "
+                                + arPersons[position]);
+                        System.out.println("Position: " + position);
                     }
                     break;
+                }
 
-                case 3:
+                case 3: {
+                    double total = calcTotalMonthlySales();
 
-                case 4:
-                    System.out.println("Search for Salesperson: ");
-                    String name4 = input.nextLine();
-                    int posi = findSalesPerson(name4);
-                    if(posi == -1){
-                        System.out.println("Salesperson not found");
-                    }else{
-                        System.out.println("""
-                                Best Salesperson
-                                %s    %.1f""", name4, );
+                    if (total != -1) {
+                        System.out.printf("Monthly sales: R%.2f%n", total);
                     }
                     break;
+                }
+
+                case 4: {
+                    double salary = calcMonthlySalary();
+
+                    if (salary != -1) {
+                        System.out.printf("Monthly salary: R%.2f%n",
+                                salary);
+                    }
+                    break;
+                }
+
+                case 5:
+                    System.out.println("Best salesperson: "
+                            + getBestSalesPerson());
+                    break;
+
+                case 6:
+                    System.out.printf("Monthly turnover: R%.2f%n",
+                            calcMonthlyTurnOver());
+                    break;
+
+                case 7:
+                    System.out.printf("Salary expenditure: R%.2f%n",
+                            calcSalaryExpenditure());
+                    break;
+                
+                default:
+                    System.out.println("Invalid option.");
+            }
+
+            while (true) {
+                System.out.print("\nDo you want to continue? (Y/N): ");
+                String answer = getInput();
+
+                if (answer.equalsIgnoreCase("Y")) {
+                    proceed = 'Y';
+                    break;
+                } else if (answer.equalsIgnoreCase("N")) {
+                    proceed = 'N';
+                    break;
+                } else {
+                    System.out.println("Please enter Y or N.");
+                }
             }
 
         }while(proceed == 'Y');
