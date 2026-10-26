@@ -7,6 +7,7 @@ public class SalesPerson {
     public SalesPerson(String names, double[] weeklySales){
         setNames(names);
         setWeeklySales(weeklySales);
+        setMonthlySales();
     }
 
     public String getNames() {

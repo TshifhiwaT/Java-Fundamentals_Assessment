@@ -74,16 +74,14 @@ public class SalesManager {
     }
 
     public String getBestSalesPerson(){
-        String name = "";
-        double monthlySales = 0;
+        SalesPerson best = salesPerson[0];
 
-        for(SalesPerson person : salesPerson){
-            if(person.getMonthlySales() > monthlySales){
-                name = person.getNames();
-                monthlySales = person.getMonthlySales();
+        for(int i = 1; i < salesPerson.length; i++){
+            if(salesPerson[i].getMonthlySales() > best.getMonthlySales()){
+                best = salesPerson[i];
             }
         }
-        return name + " " + monthlySales;
+        return best.getNames() + " " + best.getMonthlySales();
     }
 
 
@@ -145,7 +143,7 @@ public class SalesManager {
                     double total = calcTotalMonthlySales();
 
                     if (total != -1) {
-                        System.out.printf("Monthly sales: R%.2f%n", total);
+                        System.out.printf("Monthly sales: R%.1f%n", total);
                     }
                     break;
                 }
@@ -154,25 +152,23 @@ public class SalesManager {
                     double salary = calcMonthlySalary();
 
                     if (salary != -1) {
-                        System.out.printf("Monthly salary: R%.2f%n",
+                        System.out.printf("Monthly salary: R%.1f%n",
                                 salary);
                     }
                     break;
                 }
 
                 case 5:
-                    System.out.println("Best salesperson: "
-                            + getBestSalesPerson());
+                    System.out.println("Best salesperson");
+                    System.out.println(getBestSalesPerson());
                     break;
 
                 case 6:
-                    System.out.printf("Monthly turnover: R%.2f%n",
-                            calcMonthlyTurnOver());
+                    System.out.printf("Monthly turnover: R%.1f%n", calcMonthlyTurnOver());
                     break;
 
                 case 7:
-                    System.out.printf("Salary expenditure: R%.2f%n",
-                            calcSalaryExpenditure());
+                    System.out.printf("Salary expenditure: R%.1f%n", calcSalaryExpenditure());
                     break;
                 
                 default:
